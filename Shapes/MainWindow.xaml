@@ -1,0 +1,69 @@
+﻿<Window x:Class="Shapes.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Shapes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="TextBox" TargetType="TextBox">
+            <Setter Property="MinWidth" Value="70" />
+        </Style>
+        <Style x:Key="AreaTextBlock" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="HeaderTextBlock" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="FontWeight" Value="Heavy" />
+        </Style>
+    </Window.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="ShapeList" Style="{StaticResource HeaderTextBlock}"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5,5,35,5">
+            <ComboBox x:Name="comboBox" Width="80">
+                <ComboBoxItem IsSelected="True">Circle</ComboBoxItem>
+                <ComboBoxItem>Rectangle</ComboBoxItem>
+                <ComboBoxItem>Triangle</ComboBoxItem>
+            </ComboBox>
+            <TextBlock Text="   r: "/>
+            <TextBox x:Name="textBoxRadius" Style="{StaticResource TextBox}"/>
+            <TextBlock Text=" a: "/>
+            <TextBox x:Name="textBoxSideA" Style="{StaticResource TextBox}"/>
+            <TextBlock Text=" b: "/>
+            <TextBox x:Name="textBoxSideB" Style="{StaticResource TextBox}"/>
+            <TextBlock Text=" h: "/>
+            <TextBox x:Name="textBoxHeight" Style="{StaticResource TextBox}"/>
+            <TextBlock Text="   " />
+            <Button Click="Add_Button">Add Shape</Button>
+        </StackPanel>
+
+        <DataGrid Grid.Row="2" ItemsSource="{Binding Path=Shapes}" AutoGenerateColumns="False" IsReadOnly="True"
+                      CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Figur" Binding="{Binding Path=Name}" MinWidth="100" FontWeight="Bold" />
+                <DataGridTextColumn Header="r" Binding="{Binding Path=Radius}" MinWidth="100" />
+                <DataGridTextColumn Header="a" Binding="{Binding Path=SideA}" MinWidth="100" />
+                <DataGridTextColumn Header="b" Binding="{Binding Path=SideB}" MinWidth="100" />
+                <DataGridTextColumn Header="h" Binding="{Binding Path=Height}" MinWidth="100" />
+                <DataGridTextColumn Header="Area" Binding="{Binding Path=Area}" MinWidth="100" FontWeight="Bold"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <WrapPanel Grid.Row="3" Margin="5,5,5,5">
+            <TextBlock Text="Summe: " Style="{StaticResource AreaTextBlock}"/>
+            <TextBlock x:Name="textBlockArea" Text="0" Style="{StaticResource AreaTextBlock}"/>
+        </WrapPanel>
+    </Grid>
+</Window>
